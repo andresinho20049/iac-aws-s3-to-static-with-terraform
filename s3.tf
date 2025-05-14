@@ -1,7 +1,6 @@
 # Create the S3 bucket
 resource "aws_s3_bucket" "s3_static_site_bucket" {
   bucket = "${var.account_username}-${var.environment}-${var.goal}-static-site"
-  region = "us-east-1" 
 }
 
 # Enable versioning
@@ -15,10 +14,10 @@ resource "aws_s3_bucket_versioning" "s3_static_site_bucket_versioning" {
 # Public access block
 resource "aws_s3_bucket_public_access_block" "s3_static_site_bucket_public_access_block" {
   bucket = aws_s3_bucket.s3_static_site_bucket.id
-  block_public_acls       = true
-  ignore_public_acls      = true
-  block_public_policy     = true
-  restrict_public_buckets = true
+  block_public_acls       = false
+  ignore_public_acls      = false
+  block_public_policy     = false
+  restrict_public_buckets = false
 }
 
 # Enable bucket policy for public read access
@@ -47,13 +46,14 @@ resource "aws_s3_bucket_website_configuration" "s3_static_site_bucket_website_co
     key = "error.html"
   }
 }
+
 # Upload static website files (example)
-resource "aws_s3_object" "index_page" {
-  bucket = aws_s3_bucket.static_site_bucket.bucket
-  key    = "index.html"
-  source = "index.html" # Replace with the path to your index.html file
-  content_type = "text/html"
-}
+# resource "aws_s3_object" "index_page" {
+#   bucket = aws_s3_bucket.s3_static_site_bucket.id
+#   key    = "index.html"
+#   source = "index.html" 
+#   content_type = "text/html"
+# }
 
 output "s3_dns" {
   value = aws_s3_bucket.s3_static_site_bucket.website_endpoint
