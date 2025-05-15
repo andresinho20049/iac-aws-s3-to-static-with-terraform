@@ -1,6 +1,6 @@
 module "development" {
   source = "../"
-  account_username = "andresinho20049"
+  account_username = "set-your-account-username"
   environment = "dev"
   goal = "lovable-spa-test"
 }
