@@ -2,7 +2,7 @@ module "development" {
   source = "../"
   account_username = "set-your-account-username"
   environment = "dev"
-  goal = "lovable-spa-test"
+  goal = "set-your-goal"
 }
 
 output "s3_dns" {
